@@ -39,18 +39,39 @@ function seleccionUsuario (nombre) {
 
 }
 
-
 // Servicios segun tipo de usuario 
 
 function serviciosUsuario(tipoDeUsuario) {
+
+let arrayProductos = []
+
+    // Servicios Vendedor
+
     if(tipoDeUsuario == 'vendedor') {
 
+        do {
+            ingresarNuevaVenta(); 
+            } while (agregarOtro == 1)
+            if (agregarOtro == 2) {
+                let mensajeAnadidos = "Tus libros para vender han sido agregados: \n"
+                    for (let i = 0; i < arrayProductos.length; i++) {
+                        let producto = arrayProductos[i];
+                        mensajeAnadidos += "Nombre del libro: " + producto.nombre + ", Precio: " + producto.precio + ", Estado: " + producto.libroUsado + "\n";
+                    }
+                alert(mensajeAnadidos + "\n" + 'Gracias por visitarnos!')
+            }
 
         function ingresarNuevaVenta() {
+            class Libro {
+                constructor(nombre, precio, libroUsado){
+                    this.nombre = nombre;
+                    this.precio = precio;
+                    this.libroUsado = libroUsado;
+                }
+            }
 
             let name = prompt("Ingresa el nombre del libro");
             let used = prompt("Es el libro es usado? Indique: \n 1) Si \n 2) No");
-        
                 let price;
                 let descuento;
                 let libroUsado;
@@ -64,50 +85,112 @@ function serviciosUsuario(tipoDeUsuario) {
                     price = 15
                     descuento = 0;
                 }
-            
-            alert("Tu venta quedo agregada \n 1) Nombre del libro: " + name + "\n 2) Precio: " + price * (1 + descuento + iva) + " \n 3) Tipo de libro: " + libroUsado)         
-            
+            let precio = price * (1 + descuento + iva);
+
+            const libroAnadido = new Libro(name,precio,libroUsado);
+            arrayProductos.push(libroAnadido)
+
             agregarOtro = prompt("Quieres agregar otra venta? \n 1) Si \n 2) No")
             return agregarOtro
-        
+
         }
 
-        do {
-        ingresarNuevaVenta(); 
-        } while (agregarOtro == 1)
+    console.log(arrayProductos)
 
-        if (agregarOtro == 2) {
-            alert('Gracias por visitarnos!')
-        }
+    // Servicios Comprador
 
     } else if(tipoDeUsuario == 'comprador') {
 
-        let carrito;
-        comprarLibro()
-        alert("Compra exitosa. Total a pagar: " + carrito + ". Gracias por visitarnos")
+        let arrayProductos = [
+            {
+                nombre: "Libro1",
+                precio: 17.25,
+                libroUsado: "Nuevo"
+            },
+            {
+                nombre: "Libro2",
+                precio: 12.5,
+                libroUsado: "Usado"
+            },
+            {
+                nombre: "Libro3",
+                precio: 12.5,
+                libroUsado: "Usado"
+            },
+        ]
+
+        let arrayCarrito = [];
+
+        let mensaje = "Productos disponibles: \n"
+            for (let i = 0; i < arrayProductos.length; i++) {
+                let producto = arrayProductos[i];
+                mensaje += "Nombre del libro: " + producto.nombre + ", Precio: " + producto.precio + ", Estado: " + producto.libroUsado + "\n";
+            }
+
+        let finalizarCompra
+
+        do {
+            comprarLibro(); 
+            } while (finalizarCompra == 1) 
+            if (finalizarCompra == 2) {
+                verCarrito();
+            } else if (finalizarCompra == 0){
+                alert("Lo sentimos. No contamos con ese libro por el momento. Gracias por visitarnos")
+            }else if (finalizarCompra == 'cancel'){
+                alert("Compra cancelada. Gracias por visitarnos!")
+            } else {
+                alert("Lo sentimos. No pudimos completar tu orden. Gracias por visitarnos")
+            }
 
         function comprarLibro() { 
-            let producto = prompt("Indica el tipo de libro que quieres comprar \n 1) Nuevo \n 2) Usado")
-            let cantidad = parseInt(prompt("Indica la cantidad de libros que quieres comprar?"))
-            let price;
-            let descuento;
-            const iva = 0.15
-        
-                if(producto == "1") {
-                    descuento = 0;
-                    price = 15 * (1 + descuento + iva);
-                } else if(producto == "2") {
-                    descuento = 0.1;
-                    price = 10 *(1 + descuento + iva);
-                }
-                
-            return carrito = cantidad * price; 
+            let producto = prompt(mensaje + "\n" + "Indica el nombre del libro que quieres comprar")
+            const libroBuscado = arrayProductos.find((libro)=> libro.nombre == producto)
+                console.log(libroBuscado)
+
+            if (libroBuscado == undefined) {
+                finalizarCompra = 0
+            } else {
+                let comprarLibro = confirm("Libro encontrado! Deseas agregar el libro al carrito?")
+                if (comprarLibro == true) {
+                    arrayCarrito.push(libroBuscado)
+                    aggregarCarrito()
+                } else (
+                    finalizarCompra = 'cancel'
+                )
             }
+        }
+
+        function aggregarCarrito() {
+            let mensajeAgregadoCarrito
+            let lastItem = arrayCarrito.length - 1
+            let esUsado = arrayCarrito[lastItem].libroUsado
+            console.log(esUsado)
+                if (esUsado == 'Usado') {
+                    const descuento = 0.1
+                    arrayCarrito[lastItem].precio = arrayCarrito[lastItem].precio * (1 - descuento)
+                } else {
+                    price = arrayCarrito[lastItem].precio
+                }
+            mensajeAgregadoCarrito = `El libro que has añadido al carrito es ${arrayCarrito[lastItem].nombre} y es ${arrayCarrito[lastItem].libroUsado}. El precio final es de ${arrayCarrito[lastItem].precio}. Recuerda que los libros Usados tienen 10% de descuento. \n`
+            finalizarCompra = prompt(mensajeAgregadoCarrito + "Que deseas hacer a continuacion? \n 1) Seguir Comprando \n 2) Ver carrito")
+        }
+
+        function verCarrito() {
+            let total = 0;
+            let mensajeCarrito = "Productos agregados al carrito: \n"
+                for (let i = 0; i < arrayCarrito.length; i++) {
+                    let librosCarrito = arrayCarrito[i];
+                    mensajeCarrito += "Nombre del libro: " + librosCarrito.nombre + ", Precio: " + librosCarrito.precio + ", Estado: " + librosCarrito.libroUsado + "\n"
+                    total += arrayCarrito[i].precio
+                }
+            finalizarCompra = confirm(mensajeCarrito + "\n Total a pagar: " + total + "\n Deseas finalizar compra?")
+
+            if (finalizarCompra == true) {
+                alert("Tu compra fue exitosa. Gracias por visitarnos!")
+            } else {
+                alert("Compra cancelada. Gracias por visitarnos!")
+            }
+        }
+
     }
-    
 }
-
-
-
-
-
