@@ -7,14 +7,14 @@
     <!-- Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- custom styles -->
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="..\css\style.css">
     <!-- Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/c20f16dd22.js" crossorigin="anonymous"></script>
-    <title>Libreria</title>
+    <title>Comprar</title>
 </head>
 
 <body>
@@ -28,13 +28,13 @@
             <i class="fa-solid fa-book logo"></i>
             <ul class="navbar-nav">
                 <li class = "nav_titulos">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="..\index.html">Home</a>
                 </li>
                 <li class = "nav_titulos">
-                    <a class="nav-link" href="pages\comprar.html">Comprar</a>
+                    <a class="nav-link" href="comprar.html">Comprar</a>
                 </li>
                 <li class = "nav_titulos">
-                    <a class="nav-link" href="pages\vender.html"> Vender</a>
+                    <a class="nav-link" href="vender.html"> Vender</a>
                 </li>
             </ul>
         </div>
@@ -43,27 +43,67 @@
 
 <!-- Main -->
 <main>
-    <section class = "contenedor_1">
-        <!-- Section 1: Introduction -->
-        <div class="section_1">
-            <div>
-                <h1>¡Bienvenidos!</h1>
-                <h2>Publica, vende y compra libros.</h2>
-                <p>Indicanos que deseas hacer el dia de hoy:</p>
+    <section class = "comprar_section1">
+        <h1>Libros disponibles</h1>
+        <input type="search" placeholder="Buscar libro..." name="text" class="input">
+        
+        <div class="comprar_librosdis">
+
+            <div class="card">
+                <div class="card__image">
+                    <img src="..\resources\img\orgullo-y-prejuicio.jpg" alt="Libro1">
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Orgullo y prejuicio</h2>
+                    <h3 class="card__subtitle">Jane Austen</h3>
+                    <p class="card_description">$17.50</p>
+                    <p class="card_description">Nuevo</p>
+                    <button id = "alerta_libroagregado" class="card__button" href="#">Comprar</button>
+                </div>
             </div>
-            <div class = "contenedor_2">
-                <button id = "comprar">
-                    <span class="button_top">Comprar libros</span>
-                </button>
-                <button id = "vender">
-                    <span class="button_top">Vender libros</span>
-                </button>
+
+            <div class="card">
+                <div class="card__image">
+                    <img src="..\resources\img\el-progreso-del-amor.jpg" alt="Libro2">
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">El progreso del amor</h2>
+                    <h3 class="card__subtitle">Alice Munro</h3>
+                    <p class="card_description">$12.5</p>
+                    <p class="card_description">Usado</p>
+                    <button id = "alerta_libroagregado1" class="card__button" href="#">Comprar</button>
+                </div>
             </div>
+
+            <div class="card">
+                <div class="card__image">
+                    <img src="..\resources\img\pensar-rapido-pensar-despacio.jpg" alt="Libro3">
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Pensar rapiso, pensar despacio</h2>
+                    <h3 class="card__subtitle">Daniel Kahneman</h3>
+                    <p class="card_description">$12.5</p>
+                    <p class="card_description">Usado</p>
+                    <button id = "alerta_libroagregado" class="card__button" href="#">Comprar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__image">
+                    <img src="..\resources\img\81eT2pjx4jL._AC_UF1000,1000_QL80_.jpg" alt="Libro4">
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Habitos Atomicos</h2>
+                    <h3 class="card__subtitle">James Clear</h3>
+                    <p class="card_description">$17.50</p>
+                    <p class="card_description">Nuevo</p>
+                    <button id = "alerta_libroagregado" class="card__button" href="#">Comprar</button>
+                </div>
+            </div>
+
         </div>
-        <!-- Section 2: Decor -->
-        <div>
-            <img id="img1" src="resources\img\books-2596809_1920.jpg" alt="Imagen 1">
-        </div>
+
+
     </section>
 </main>
 
@@ -88,8 +128,8 @@
                 <div class="centrar">
                         <h3>Company</h3>
                         <ul class="paginas">
-                            <li><a href="pages\comprar.html">Comprar</a></li>
-                            <li><a href="pages\vender.html">Vender</a></li>
+                            <li><a href="comprar.html">Comprar</a></li>
+                            <li><a href="vender.html">Vender</a></li>
                         </ul>
                 </div>
                 <!-- Fin parte 2 -->
@@ -110,9 +150,10 @@
 </body>
 
 <!-- JS-->
-<script src="js\main.js"></script>  
+<script src="..\js\comprar.js"></script>  
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </html>
